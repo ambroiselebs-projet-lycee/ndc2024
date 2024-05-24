@@ -9,7 +9,7 @@ class Player:
         self.skinX = skinX
         self.skinY = skinY
         self.fall = False
-        self.dureeMalus = 70
+        self.dureeMalus = 40
         self.passTime = 0
         self.TOUCHES = {
             0: [pyxel.KEY_EXCLAIM, 0, 48, pyxel.KEY_EXCLAIM],
@@ -63,6 +63,11 @@ class Player:
                  self.posX += self.speed
 
     def liberer(self) -> None:
+         if self.passTime >= self.dureeMalus:
+            self.fall = False
+            self.passTime = 0
+            self.posX -= 21
+
          if (pyxel.btnp(self.TOUCHES[self.toucheRandom][0]) or pyxel.btnp(self.TOUCHES[self.toucheRandom][3])) and self.fall:
             self.fall = False
             self.passTime = 0
